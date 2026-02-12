@@ -3,8 +3,10 @@ from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
-# Security constants - In a real app, these would be in env vars
-SECRET_KEY = "HACKER_SECRET_KEY_PROD_READY"
+import os
+
+# Security constants
+SECRET_KEY = os.getenv("JWT_SECRET", "HACKER_SECRET_KEY_FALLBACK_NOT_FOR_PROD")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 

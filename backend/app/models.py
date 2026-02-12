@@ -1,16 +1,6 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, Boolean
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean
+from app.db import Base, engine
 import datetime
-
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./cyber_portfolio.db'
-
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False}
-)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'users'
