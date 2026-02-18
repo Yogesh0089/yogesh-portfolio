@@ -1,18 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.endpoints import auth, general
+from app.api.endpoints import auth, general, admin
 
 app = FastAPI(title="Cyber Portfolio API")
 
 # ✅ CORS for local + Vercel deployments
-# Note: FastAPI's CORS middleware doesn't reliably support wildcard entries like "https://*.vercel.app"
-# so we use allow_origin_regex for Vercel subdomains.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://cyber-portfolio-frontend.vercel.app", # Adjust to actual domain
     ],
     allow_origin_regex=r"^https://.*\.vercel\.app$",
     allow_credentials=True,
@@ -22,6 +21,7 @@ app.add_middleware(
 
 # ✅ API Routers
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
+app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
 app.include_router(general.router, prefix="/api", tags=["general"])
 
 

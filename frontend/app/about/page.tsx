@@ -2,18 +2,19 @@
 
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import {
-    Shield,
-    Terminal as TerminalIcon,
-    Cpu,
-    Code,
-    Zap,
-    Search,
-    Layers,
-    Users,
-    Award,
-    Target,
+import { 
+    Shield, 
+    Terminal as TerminalIcon, 
+    Cpu, 
+    Code, 
+    Zap, 
+    Search, 
+    Layers, 
+    Users, 
+    Award, 
+    Target, 
     Heart,
+    ArrowRight,
     Play,
     Download,
     Mail
@@ -24,12 +25,12 @@ export default function AboutPage() {
     return (
         <div className="min-h-screen bg-cyber-dark text-white selection:bg-cyber-green selection:text-black font-mono">
             <Navbar />
-
+            
             <main className="max-w-7xl mx-auto px-4 pt-32 pb-24 space-y-32">
-
+                
                 {/* 1. HERO INTRO */}
                 <section className="space-y-6">
-                    <motion.div
+                    <motion.div 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="flex items-center space-x-2 text-cyber-green text-sm"
@@ -42,13 +43,13 @@ export default function AboutPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                     >
-                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
                             I build <span className="text-cyber-green">secure systems</span>,<br />
                             not just applications.
                         </h1>
-                        <p className="mt-8 text-lg md:text-xl text-white/60 max-w-3xl font-sans leading-relaxed px-2">
-                            Yogesh Raikwar here — a Backend Engineer and Ethical Hacker dedicated to
-                            engineering resilient digital infrastructures. Combining offensive security
+                        <p className="mt-8 text-xl text-white/60 max-w-3xl font-sans leading-relaxed">
+                            Yogesh Raikwar here — a Backend Engineer and Ethical Hacker dedicated to 
+                            engineering resilient digital infrastructures. Combining offensive security 
                             prowess with defensive architectural rigor.
                         </p>
                     </motion.div>
@@ -62,13 +63,13 @@ export default function AboutPage() {
                         </h2>
                         <div className="space-y-4 text-lg text-white/70 leading-relaxed">
                             <p>
-                                Currently pursuing my Computer Science Engineering at LNCT Group of Colleges,
-                                my journey has been defined by a relentless curiosity about how things break—and
+                                Currently pursuing my Computer Science Engineering at LNCT Group of Colleges, 
+                                my journey has been defined by a relentless curiosity about how things break—and 
                                 the discipline required to fix them.
                             </p>
                             <p>
-                                I specialize in building backend ecosystems that are secure by design. My work
-                                involves hands-on cybersecurity research, Python-driven automation, and the
+                                I specialize in building backend ecosystems that are secure by design. My work 
+                                involves hands-on cybersecurity research, Python-driven automation, and the 
                                 development of hardened APIs that can withstand the scrutiny of modern threat vectors.
                             </p>
                         </div>
@@ -191,7 +192,7 @@ export default function AboutPage() {
                                     { step: "Tactical Deployment", desc: "Clean, documented, and tested implementation using modern tech stacks." }
                                 ].map((step, i) => (
                                     <div key={i} className="flex space-x-4">
-                                        <span className="text-cyber-green font-mono font-bold">0{i + 1}.</span>
+                                        <span className="text-cyber-green font-mono font-bold">0{i+1}.</span>
                                         <div>
                                             <h5 className="font-bold uppercase text-[10px] tracking-widest text-cyber-cyan">{step.step}</h5>
                                             <p className="text-xs opacity-50 font-sans mt-1">{step.desc}</p>
@@ -201,10 +202,10 @@ export default function AboutPage() {
                             </div>
                         </div>
                         <div className="hidden lg:flex justify-center">
-                            <div className="w-64 h-64 border-2 border-cyber-green/20 rounded-full flex items-center justify-center relative animate-spin-slow">
-                                <div className="absolute inset-0 border-2 border-t-cyber-green border-r-transparent border-b-transparent border-l-transparent rounded-full"></div>
-                                <Shield className="text-cyber-green/50 animate-pulse" size={80} />
-                            </div>
+                           <div className="w-64 h-64 border-2 border-cyber-green/20 rounded-full flex items-center justify-center relative animate-spin-slow">
+                               <div className="absolute inset-0 border-2 border-t-cyber-green border-r-transparent border-b-transparent border-l-transparent rounded-full"></div>
+                               <Shield className="text-cyber-green/50 animate-pulse" size={80} />
+                           </div>
                         </div>
                     </div>
                 </section>
@@ -259,11 +260,11 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-mono font-bold text-center tracking-tighter uppercase italic">Verified Expertise</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {[
-                            "AWS Academy Cloud Foundations",
-                            "CS50 AI with Python",
-                            "CS50 Cybersecurity",
-                            "Metasploit Mastery",
-                            "Prompt Engineering",
+                            "AWS Academy Cloud Foundations", 
+                            "CS50 AI with Python", 
+                            "CS50 Cybersecurity", 
+                            "Metasploit Mastery", 
+                            "Prompt Engineering", 
                             "Blockchain Basics"
                         ].map((cert, i) => (
                             <div key={i} className="glass p-4 text-center border-white/5 flex flex-col items-center justify-center space-y-3 group hover:border-cyber-cyan/30 transition-all">
@@ -282,8 +283,8 @@ export default function AboutPage() {
                             <span className="uppercase tracking-tighter font-mono">Mission Objective</span>
                         </h2>
                         <p className="text-lg text-white/60 leading-relaxed italic border-l-2 border-cyber-green pl-6 py-2">
-                            "I aim to deploy my technical skills in real-world environments where security
-                            integrity and backend logic are critical. My goal is to work with teams
+                            "I aim to deploy my technical skills in real-world environments where security 
+                            integrity and backend logic are critical. My goal is to work with teams 
                             that push the boundaries of what's possible in applied AI and defense-in-depth architecture."
                         </p>
                     </div>
@@ -315,7 +316,7 @@ export default function AboutPage() {
 
                 {/* 10. CALL TO ACTION */}
                 <section className="text-center space-y-12">
-                    <div className="space-y-4">
+                     <div className="space-y-4">
                         <h2 className="text-4xl md:text-6xl font-mono font-bold tracking-tighter uppercase">Tactical Connection</h2>
                         <p className="text-white/40 font-mono text-xs tracking-[0.5em] uppercase animate-pulse">Waiting for your command...</p>
                     </div>

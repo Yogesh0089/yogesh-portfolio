@@ -29,6 +29,23 @@ def complete_challenge(completion: schemas.CTFCompletionCreate, db: Session = De
     db.commit()
     return {"status": "success", "message": "Access Granted."}
 
-@router.get("/logs", response_model=List[schemas.LogCreate])
-def get_logs(db: Session = Depends(get_db)):
-    return db.query(models.Log).order_by(models.Log.timestamp.desc()).limit(50).all()
+@router.get("/projects", response_model=List[schemas.Project])
+def get_projects(db: Session = Depends(get_db)):
+    return db.query(models.Project).all()
+
+@router.get("/skills", response_model=List[schemas.Skill])
+def get_skills(db: Session = Depends(get_db)):
+    return db.query(models.Skill).all()
+
+@router.get("/about", response_model=schemas.AboutContent)
+def get_about(db: Session = Depends(get_db)):
+    about = db.query(models.AboutContent).first()
+    if not about:
+        return {
+            "id": 0,
+            "intro": "Welcome to my secure portfolio.",
+            "role": "Security Professional",
+            "profile_image": None,
+            "experience": "Researching threats and building secure systems."
+        }
+    return about

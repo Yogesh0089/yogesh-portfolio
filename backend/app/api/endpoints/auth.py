@@ -1,35 +1,54 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
-from app import models, schemas
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
+from fastapi.security import OAuth2PasswordRequestForm
 from app.core import security
-from app.db import get_db
 from datetime import timedelta
+import os
 
 router = APIRouter()
 
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "cyber_secure_2024") # Default for safety, should be in env
+
 @router.post("/login")
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.username == form_data.username).first()
-    if not user or not security.verify_password(form_data.password, user.hashed_password):
+def login(response: Response, form_data: OAuth2PasswordRequestForm = Depends()):
+    if form_data.username != ADMIN_USERNAME or form_data.password != ADMIN_PASSWORD:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    
     access_token_expires = timedelta(minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = security.create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": ADMIN_USERNAME}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    
+    # Set HttpOnly cookie
+    response.set_cookie(
+        key="admin_token",
+        value=access_token,
+        httponly=True,
+        max_age=security.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        expires=security.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        samesite="lax",
+        secure=True if os.getenv("ENVIRONMENT") == "production" else False
+    )
+    
+    return {"message": "Login successful", "access_token": access_token}
 
-@router.post("/register") # In this portfolio demo, this might be restricted or one-time
-def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.username == user.username).first()
-    if db_user:
-        raise HTTPException(status_code=400, detail="Username already registered")
-    hashed_pass = security.get_password_hash(user.password)
-    new_user = models.User(username=user.username, hashed_password=hashed_pass)
-    db.add(new_user)
-    db.commit()
-    return {"message": "User created successfully"}
+@router.post("/logout")
+def logout(response: Response):
+    response.delete_cookie("admin_token")
+    return {"message": "Logged out successfully"}
+
+@router.get("/me")
+def get_me(request: Request):
+    token = request.cookies.get("admin_token")
+    if not token:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    payload = security.verify_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+    
+    return {"username": payload.get("sub")}

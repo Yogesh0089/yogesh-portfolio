@@ -35,10 +35,9 @@ export default function Navbar() {
                 </Link>
 
                 <div className="hidden md:flex items-center space-x-8 font-mono text-[10px] tracking-widest uppercase">
-                    <Link href="/about" className="hover:text-cyber-green transition-colors text-white font-mono no-underline">About</Link>
+                    <button onClick={() => scrollToSection('about')} className="hover:text-cyber-green transition-colors cursor-pointer bg-transparent border-none text-white font-mono">About</button>
                     <button onClick={() => scrollToSection('projects')} className="hover:text-cyber-green transition-colors cursor-pointer bg-transparent border-none text-white font-mono">Operations</button>
-                    <button onClick={() => scrollToSection('lab')} className="hover:text-cyber-green transition-colors cursor-pointer bg-transparent border-none text-white font-mono">Range</button>
-                    <button onClick={() => scrollToSection('contact')} className="hover:text-cyber-green transition-colors cursor-pointer bg-transparent border-none text-cyber-cyan font-bold font-mono uppercase tracking-[0.2em]">Connect</button>
+                    <Link href="/lab" className="hover:text-cyber-green transition-colors text-cyber-cyan font-bold no-underline">CyberRange</Link>
                     <Link href="/abort" className="text-red-500 flex items-center space-x-1 hover:text-red-400 group no-underline">
                         <ShieldAlert size={14} className="group-hover:animate-pulse" />
                         <span>Abort</span>
@@ -59,10 +58,9 @@ export default function Navbar() {
             {isMenuOpen && (
                 <div className="md:hidden glass border-t border-cyber-green/10">
                     <div className="flex flex-col p-6 space-y-6 font-mono text-sm tracking-widest uppercase items-center">
-                        <Link href="/about" onClick={() => setIsMenuOpen(false)} className="text-white no-underline font-mono">About</Link>
+                        <button onClick={() => scrollToSection('about')} className="text-white bg-transparent border-none font-mono">About</button>
                         <button onClick={() => scrollToSection('projects')} className="text-white bg-transparent border-none font-mono">Operations</button>
-                        <button onClick={() => scrollToSection('lab')} className="text-white bg-transparent border-none font-mono">Range</button>
-                        <button onClick={() => scrollToSection('contact')} className="text-cyber-cyan bg-transparent border-none font-mono font-bold">Connect</button>
+                        <Link href="/lab" onClick={() => setIsMenuOpen(false)} className="text-cyber-cyan no-underline">CyberRange</Link>
                         <Link href="/abort" onClick={() => setIsMenuOpen(false)} className="text-red-500 no-underline">Abort_Protocol</Link>
                         <Link href="/admin" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-2 border border-cyber-green text-cyber-green no-underline">
                             Admin_Panel

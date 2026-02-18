@@ -204,23 +204,48 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* 4. TACTICAL PROJECTS */}
+            {/* 4. TACTICAL PROJECTS & SERVICES */}
             <section id="projects" className="py-32 bg-black/30 w-full overflow-hidden border-y border-white/5">
-                <div className="max-w-7xl mx-auto px-4 space-y-20">
-                    <div className="text-center space-y-4">
-                        <h2 className="text-cyber-green font-mono text-xs tracking-[0.5em] uppercase px-4 inline-block border-l border-r border-cyber-green/30">
-                            / SECURE_OPERATIONS
-                        </h2>
-                        <h3 className="text-4xl md:text-7xl font-mono font-bold tracking-tighter">Tactical Deployment</h3>
-                        <p className="max-w-xl mx-auto opacity-50 font-sans px-4">A collection of secure applications and automated security scripts designed for high-stress environments.</p>
+                <div className="max-w-7xl mx-auto px-4 space-y-24">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div className="space-y-6">
+                            <h2 className="text-cyber-green font-mono text-xs tracking-[0.5em] uppercase px-4 inline-block border-l border-r border-cyber-green/30">
+                                / OPERATIONAL_CAPABILITIES
+                            </h2>
+                            <h3 className="text-4xl md:text-6xl font-mono font-bold tracking-tighter uppercase mb-6">Security-First Infrastructure</h3>
+                            <p className="max-w-xl opacity-60 font-sans text-lg leading-relaxed">
+                                I provide end-to-end security engineering services, from initial reconnaissance
+                                to the deployment of hardened, high-availability backend systems.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {[
+                                { title: "API Hardening", desc: "Building resilient REST/GraphQL gateways with advanced auth & sanitization.", icon: Shield },
+                                { title: "Pentesting", desc: "Identifying vulnerabilities via systematic exploitation and audit reports.", icon: Lock },
+                                { title: "DevSecOps", desc: "Integrating security scans and automated compliance into CI/CD pipelines.", icon: Zap },
+                                { title: "AI Defense", desc: "Deploying machine learning models for real-time threat detection.", icon: Activity }
+                            ].map((service, i) => (
+                                <div key={i} className="p-6 bg-white/5 border border-white/10 hover:border-cyber-green/50 transition-all group">
+                                    <service.icon className="text-cyber-green mb-4 group-hover:scale-110 transition-transform" size={24} />
+                                    <h5 className="font-bold text-sm uppercase tracking-widest text-white mb-2">{service.title}</h5>
+                                    <p className="text-xs opacity-40 leading-relaxed">{service.desc}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <Projects />
-                    <div className="text-center pt-12">
-                        <Link href="https://github.com/yogesh-dev" className="inline-flex items-center space-x-3 text-white/40 hover:text-white transition-colors font-mono text-xs tracking-widest no-underline group">
-                            <Github size={20} />
-                            <span>VIEW_EXTENDED_REPOSITORY [LINKOUT]</span>
-                            <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
+
+                    <div className="space-y-12">
+                        <div className="text-center">
+                            <h4 className="text-2xl font-mono font-bold uppercase tracking-widest text-cyber-cyan italic border-b border-cyber-cyan/20 pb-4 inline-block">Active_Deployments</h4>
+                        </div>
+                        <Projects />
+                        <div className="text-center pt-12">
+                            <Link href="https://github.com/yogesh-dev" className="inline-flex items-center space-x-3 text-white/40 hover:text-white transition-colors font-mono text-xs tracking-widest no-underline group">
+                                <Github size={20} />
+                                <span>VIEW_EXTENDED_REPOSITORY [LINKOUT]</span>
+                                <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -268,22 +293,27 @@ export default function Home() {
                         </div>
 
                         <div className="flex flex-col space-y-6">
-                            <a href="mailto:yogesh@cyber.io" className="flex items-center space-x-6 group no-underline text-white">
+                            <a href="mailto:yogeshraikwar@outlook.com" className="flex items-center space-x-6 group no-underline text-white">
                                 <div className="p-4 bg-white/5 border border-white/10 text-cyber-green group-hover:bg-cyber-green group-hover:text-black transition-all">
                                     <Mail size={24} />
                                 </div>
                                 <div>
                                     <span className="block text-[10px] uppercase tracking-widest opacity-40 font-mono">Priority Mail</span>
-                                    <span className="text-xl font-mono">yogesh@cyber.io</span>
+                                    <span className="text-xl font-mono">yogeshraikwar@outlook.com</span>
                                 </div>
                             </a>
-                            <a href="#" className="flex items-center space-x-6 group no-underline text-white">
+                            <a
+                                href="https://linkedin.com/in/yogeshraikwar"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center space-x-6 group no-underline text-white"
+                            >
                                 <div className="p-4 bg-white/5 border border-white/10 text-cyber-cyan group-hover:bg-cyber-cyan group-hover:text-black transition-all">
                                     <Linkedin size={24} />
                                 </div>
                                 <div>
                                     <span className="block text-[10px] uppercase tracking-widest opacity-40 font-mono">Connect Professional</span>
-                                    <span className="text-xl font-mono">linkedin.com/in/yogesh</span>
+                                    <span className="text-xl font-mono">linkedin.com/in/yogeshraikwar</span>
                                 </div>
                             </a>
                         </div>

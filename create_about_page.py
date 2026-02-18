@@ -363,8 +363,3 @@ export default function AboutPage() {
 with open('frontend/app/about/page.tsx', 'w', encoding='utf-8') as f:
     f.write(about_page_content)
 print("Dedicated About page created successfully.")
-"""
-
-with open('create_about_page.py', 'w', encoding='utf-8') as f:
-    f.write(about_page_content)
-print("Fixing and running creation script.")
