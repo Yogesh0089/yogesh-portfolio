@@ -4,14 +4,16 @@ from app.core import security
 from datetime import timedelta
 import os
 
+from app.db import get_db
+from sqlalchemy.orm import Session
+from app import models
+
 router = APIRouter()
 
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "cyber_secure_2024") # Default for safety, should be in env
-
 @router.post("/login")
-def login(response: Response, form_data: OAuth2PasswordRequestForm = Depends()):
-    if form_data.username != ADMIN_USERNAME or form_data.password != ADMIN_PASSWORD:
+def login(response: Response, db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()):
+    user = db.query(models.User).filter(models.User.username == form_data.username).first()
+    if not user or not security.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
@@ -20,7 +22,7 @@ def login(response: Response, form_data: OAuth2PasswordRequestForm = Depends()):
     
     access_token_expires = timedelta(minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = security.create_access_token(
-        data={"sub": ADMIN_USERNAME}, expires_delta=access_token_expires
+        data={"sub": user.username}, expires_delta=access_token_expires
     )
     
     # Set HttpOnly cookie
